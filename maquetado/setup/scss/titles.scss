@@ -1,16 +1,21 @@
 .title {
   display: flex;
-  padding: 0px 0px 0px 50px;
   align-items: center;
+  padding-left: 50px;    
 }
 
-.title img {
+.title:before {
+  content: '';
+  background: url(img/triangle.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block; 
   height: 90px;
-  width: 60px;
-  float: left;  
+  width: 60px;  
 }
 
-.title p {
+.title-text {
   font-size: 24px;
-  margin: 0px 0px 0px -15px;
+  position: absolute;
+  left: 95px;
 }
