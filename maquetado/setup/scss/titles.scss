@@ -1,20 +1,23 @@
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
 .title {
   display: flex;
   align-items: center;
-  font-family: 'Roboto', sans-serif;
   font-size: 24px;
   margin: 50px 100px;
-}
 
-.title:before {
-  content: '';
-  background: url(img/triangle.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  display: block; 
-  height: 90px;
-  width: 60px;  
-  position: absolute;
-  left: 55px;
-  z-index: -1;
+  &::before {
+    content: '';
+    background: url(img/triangle.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    display: block; 
+    height: 90px;
+    width: 60px;  
+    position: absolute;
+    left: 55px;
+    z-index: -1;
+  }
 }

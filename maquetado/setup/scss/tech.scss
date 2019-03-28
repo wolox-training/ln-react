@@ -1,17 +1,3 @@
-.tech-container {    
-  margin: 15px;  
-  height: 310px;
-  width: 220px;
-}
-
-.tech-back-container {
-  border: 2px solid  $green;
-  position: absolute;
-  border-radius: 10px;
-  width: 210px;  
-  height: 300px;
-}
-
 .tech-front-container {
   background-color: $green;
   position: absolute;
@@ -22,26 +8,35 @@
   height: 300px;
   display: flex;
   flex-direction: column;  
-  align-items: center;  
+  align-items: center;
+
+  &::before {
+    content: '';
+    border: 2px solid  $green;
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    z-index: -1;
+    border-radius: 10px;
+    width: 210px;  
+    height: 300px;
+  }
 }
 
 .tech-img {
   height: 100px;
-  width: 100px;
 }
 
 .tech-title {
-  font-family: 'Roboto', sans-serif;
-  margin: 10px;
+  margin: 5px;
   font-size: 16px;
 }
 
 .tech-release {
-  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
 }
 
 .tech-description {
-  font-family: 'Roboto', sans-serif;
   font-size: 12px;
   margin-top: 15px;
   text-align: center;
