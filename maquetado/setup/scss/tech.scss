@@ -23,6 +23,13 @@
   }
 }
 
+.tech-container:hover {
+  &::before {
+    left: 5px;
+    top: 5px;
+  }
+}
+
 .tech-img {
   height: 100px;
   width: 100px;
