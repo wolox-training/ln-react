@@ -20,3 +20,7 @@
   padding: 20px;
   font-size: $text-big;
 }
+
+@media only screen and (max-width: 1024px) {
+  .navbar-title{display: none;}
+}

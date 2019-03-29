@@ -47,3 +47,16 @@
 .tech-left-border-container {
   border-left: 2px solid $green;
 }
+
+@media only screen and (max-width: 1024px) {
+  .tech-left-border-container {border-left: 0px;}
+  .tech-catalog {
+    grid-template-columns: 210px;
+    grid-template-rows: 300px; 
+    grid-gap: 0px 0px;
+  }
+  .tech-container{
+    border-bottom: 2px solid $green;
+  }
+  .tech-container:last-child { border-bottom: 0px; }
+}
