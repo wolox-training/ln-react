@@ -1,8 +1,8 @@
 .title {
-  display: flex;
   align-items: center;
-  font-size: 24px;
+  display: flex;
   margin: 50px 100px;
+  font-size: $text-big;
 
   &::before {
     content: '';
@@ -11,9 +11,13 @@
     background-position: center;
     display: block; 
     height: 90px;
-    width: 60px;  
-    position: absolute;
     left: 55px;
+    position: absolute;
+    width: 60px;  
     z-index: -1;
   }
+}
+
+.m-top-220 {
+  margin-top: 220px;
 }
