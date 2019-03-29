@@ -2,19 +2,18 @@
   display: flex;
   align-items: center;
   font-size: 24px;
-  margin-top: 50px;
-  margin-left: 100px;
+  margin: 50px 0px 0px 100px;
 
   &::before {
     content: '';
     background: url(img/triangle.svg);
     background-repeat: no-repeat;
-    background-position: center;
     display: block; 
     height: 90px;
     width: 60px;  
     position: absolute;
     left: 55px;
+    top: 25px;
     z-index: -1;
   }
 }
