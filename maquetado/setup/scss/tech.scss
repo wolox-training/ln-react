@@ -20,13 +20,13 @@
     border-radius: 10px;
     width: 210px;  
     height: 300px;
-    transition: all 1s;  
+    transition: left 1s, top 1s;  
   }
-}
 
-.tech-container:hover::before {
-  left: 7px;
-  top: 7px;
+  &:hover::before {
+    left: 7px;
+    top: 7px;
+  }
 }
 
 .tech-img {
