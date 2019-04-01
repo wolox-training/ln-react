@@ -9,24 +9,24 @@
   height: 300px;
   display: flex;
   flex-direction: column;  
-
+  align-items: center;  
+  
   &::before {
     content: '';
     border: 2px solid  $green;
     position: absolute;
-    right: 5px;
-    bottom: 5px;
+    left: -7px;
+    top: -7px;
     z-index: -1;
     border-radius: 10px;
     width: 210px;  
     height: 300px;
+    transition: all 1s;  
   }
-}
 
-.tech-container:hover {
-  &::before {
-    left: 5px;
-    top: 5px;
+  &:hover::before {
+    left: 7px;
+    top: 7px;
   }
 }
 
