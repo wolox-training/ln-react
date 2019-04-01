@@ -20,7 +20,7 @@
     border-radius: 10px;
     width: 210px;  
     height: 300px;
-    transition: left 1s, top 1s;  
+    transition: left 1s ease, top 1s ease;  
   }
 
   &:hover::before {
