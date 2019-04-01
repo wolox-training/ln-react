@@ -1,8 +1,10 @@
 .title {
-  display: flex;
   align-items: center;
+  display: flex;
   font-size: 24px;
-  margin: 50px 0px 0px 100px;
+  margin: 50px 0px 50px 0px;
+  padding-left: 100px;
+  position: relative; 
 
   &::before {
     content: '';
@@ -13,7 +15,6 @@
     width: 60px;  
     position: absolute;
     left: 55px;
-    top: 25px;
     z-index: -1;
   }
 }
