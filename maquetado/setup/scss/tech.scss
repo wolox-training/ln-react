@@ -49,14 +49,21 @@
 }
 
 @media only screen and (max-width: 1024px) {
-  .tech-container:nth-child(even) {border-left: 0px;}
+  .tech-container:nth-child(even) {
+    border-left: 0px;
+  }
+  
   .tech-catalog {
     grid-template-columns: 210px;
     grid-template-rows: 300px; 
     grid-gap: 0px 0px;
-  }  
-  .tech-container{
-    border-bottom: 2px solid $green;
   }
-  .tech-container:last-child { border-bottom: 0px; }
+
+  .tech-container {
+    border-bottom: 2px solid $green;
+    
+    &:last-child { 
+      border-bottom: 0px; 
+    }
+  }
 }
