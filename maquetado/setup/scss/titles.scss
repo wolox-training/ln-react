@@ -1,14 +1,15 @@
 .title {
   align-items: center;
   display: flex;
-  margin: 50px 100px;
   font-size: $text-big;
+  margin: 50px 0px 50px 0px;
+  padding-left: 100px;
+  position: relative; 
 
   &::before {
     content: '';
     background: url(img/triangle.svg);
     background-repeat: no-repeat;
-    background-position: center;
     display: block; 
     height: 90px;
     left: 55px;
