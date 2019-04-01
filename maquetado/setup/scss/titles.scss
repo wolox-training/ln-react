@@ -1,0 +1,20 @@
+.title {
+  align-items: center;
+  display: flex;
+  font-size: 24px;
+  margin: 50px 0px 50px 0px;
+  padding-left: 100px;
+  position: relative; 
+
+  &::before {
+    content: '';
+    background: url(img/triangle.svg);
+    background-repeat: no-repeat;
+    display: block; 
+    height: 90px;
+    width: 60px;  
+    position: absolute;
+    left: 55px;
+    z-index: -1;
+  }
+}
