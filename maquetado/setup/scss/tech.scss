@@ -1,7 +1,6 @@
 .tech-container {
   align-items: center;
   position: relative;
-  margin: 20px;
   padding: 20px 10px;  
   width: 210px;
   height: 300px;
@@ -48,10 +47,6 @@
 }
 
 @media only screen and (max-width: 1024px) {
-  .tech-container:nth-child(even) {
-    border-left: 0px;
-  }
-  
   .tech-catalog {
     grid-template-columns: 210px;
     grid-template-rows: 300px; 
@@ -61,8 +56,13 @@
   .tech-container {
     border-bottom: 2px solid $green;
     
+    &:first-child {
+      border-right: 0px;
+      height: 300px;
+    }
+    
     &:last-child { 
-      border-bottom: 0px; 
+      border-bottom: 0px;      
     }
   }
 }
