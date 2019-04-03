@@ -1,32 +1,21 @@
 .tech-container {
   align-items: center;
-  background-color: $green;
   position: relative;
   margin: 20px;
   padding: 20px 10px;  
-  border-radius: 10px;
   width: 210px;
   height: 300px;
   display: flex;
-  flex-direction: column;  
-  align-items: center;  
-  
-  &::before {
-    content: '';
-    border: 2px solid  $green;
-    position: absolute;
-    left: -7px;
-    top: -7px;
-    z-index: -1;
-    border-radius: 10px;
-    width: 210px;  
-    height: 300px;
-    transition: left 1s ease, top 1s ease;  
-  }
+  flex-direction: column;
+  justify-content: center;
+}
 
-  &:hover::before {
-    left: 7px;
-    top: 7px;
+
+  &:first-child {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    height: 600px;
+    border-right: 2px solid $green;    
   }
 }
 
@@ -51,8 +40,11 @@
 }
 
 .tech-catalog {
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3,210px);
+  grid-template-rows: repeat(2,300px);
+  grid-gap: 0px 20px;
+  justify-content: center;
   padding: 5px 115px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
 }
