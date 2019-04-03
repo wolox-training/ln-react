@@ -1,0 +1,22 @@
+.footer {
+  background-color: $blue;
+  display: flex;
+  height: 150px;
+  margin-top: 110px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px 20px;
+}
+
+.footer-text {
+  font-size: $text-medium;  
+  color:$white;
+  margin-bottom: 10px;
+}
+
+.footer-copyright {
+  align-self: flex-end;
+  color:$white;
+  font-size: $text-small;
+}

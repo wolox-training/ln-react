@@ -1,7 +1,7 @@
 .title {
   align-items: center;
   display: flex;
-  font-size: 24px;
+  font-size: $text-big;
   margin: 50px 0px 50px 0px;
   padding-left: 100px;
   position: relative; 
@@ -12,9 +12,13 @@
     background-repeat: no-repeat;
     display: block; 
     height: 90px;
-    width: 60px;  
-    position: absolute;
     left: 55px;
+    position: absolute;
+    width: 60px;  
     z-index: -1;
   }
+}
+
+.m-top-180 {
+  margin-top: 180px;
 }
