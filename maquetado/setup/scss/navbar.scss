@@ -6,8 +6,8 @@
   height: 70px;
   justify-content: space-between;
   position: fixed;
-  top: 0px;
-  left:0px;
+  top: 0;
+  left: 0;
   width: 100%;
   z-index: 9999;
 }
@@ -20,4 +20,10 @@
 .navbar-title {
   padding: 20px;
   font-size: $text-big;
+}
+
+@media only screen and (max-width: 1024px) {
+  .navbar-title {
+    display: none;
+  }
 }
