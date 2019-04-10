@@ -1,11 +1,11 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { func } from 'prop-types';
 import { bookSelectedPropType } from '@constants/propTypes';
 import Button from '@components/Button';
 
 import styles from './styles.scss';
 
-class Item extends PureComponent {
+class Item extends Component {
   addItem = () => {
     const { item, addItem } = this.props;
     addItem(item.id);
