@@ -100,9 +100,9 @@ const mapDispatchToProp = dispatch => ({
 });
 
 const mapStateToProp = state => ({
-  books: state.books,
-  bookSelected: state.bookSelected,
-  originalData: state.originalData
+  books: state.books.books,
+  bookSelected: state.books.bookSelected,
+  originalData: state.books.originalData
 });
 
 export default connect(mapStateToProp, mapDispatchToProp)

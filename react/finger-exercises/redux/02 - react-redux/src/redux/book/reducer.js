@@ -17,7 +17,7 @@ function reducer(state = initialState, action) {
     case actions.ADD_TO_CART: // TODO to implement the logic
       return {
         ...state,
-        bookSelected: state.bookSelected.concat(action.payload) // [...state, action.payload]
+        bookSelected: state.bookSelected.concat(action.payload)
       };
     case actions.ADD_ITEM: // TODO to implement the logic
       return {
