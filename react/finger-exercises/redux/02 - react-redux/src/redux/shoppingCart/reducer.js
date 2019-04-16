@@ -7,10 +7,7 @@ const initialState = {
 function reducer(state = initialState, action) {
   switch (action.type) {
     case actions.TOOGLE_CONTENT:
-      return {
-        ...state,
-        open: !state.open
-      };
+      return { open: !state.open };
     default:
       return state;
   }
