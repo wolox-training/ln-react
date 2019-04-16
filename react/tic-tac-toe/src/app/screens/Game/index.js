@@ -1,12 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import styles from './styles.module.scss';
 import Board from './components/Board';
 
 class Game extends React.Component {
-  state = { 
-    history: [{ 
-      squares: Array(9).fill(null) 
+  state = {
+    history: [{
+      squares: Array(9).fill(null)
     }],
     stepNumber: 0,
     xIsNext: true
@@ -20,9 +21,9 @@ class Game extends React.Component {
       return;
     }
     squares[i] = this.state.xIsNext ? 'X' : 'O';
-    this.setState(prevState => ({ 
+    this.setState(prevState => ({
       history: history.concat([{
-        squares: squares
+        squares
       }]),
       stepNumber: history.length,
       xIsNext: !prevState.xIsNext
@@ -32,7 +33,7 @@ class Game extends React.Component {
   jumpTo(step) {
     this.setState({
       stepNumber: step,
-      xIsNext: (step % 2) === 0,
+      xIsNext: step % 2 === 0
     });
   }
 
@@ -62,9 +63,10 @@ class Game extends React.Component {
     return (
       <div className={styles.game}>
         <div className={styles.gameBoard}>
-          <Board 
+          <Board
             squares={current.squares}
-            onClick={this.handleClick} />
+            onClick={this.handleClick}
+          />
         </div>
         <div className={styles.gameInfo}>
           <div>{status}</div>
@@ -75,7 +77,7 @@ class Game extends React.Component {
   }
 }
 
-export default Game;
+export default connect()(Game);
 
 function calculateWinner(squares) {
   const lines = [
@@ -86,7 +88,7 @@ function calculateWinner(squares) {
     [1, 4, 7],
     [2, 5, 8],
     [0, 4, 8],
-    [2, 4, 6],
+    [2, 4, 6]
   ];
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];

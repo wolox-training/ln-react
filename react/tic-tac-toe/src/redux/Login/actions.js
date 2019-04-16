@@ -12,6 +12,7 @@ function getLogin(user, pass) {
             return dispatch({ type: 'GET_LOGIN_FAILURE', res });
           }
           dispatch({ type: 'GET_LOGIN_SUCCESS', res });
+          localStorage.setItem('token', res.data.token);
           return dispatch(push('/game'));
         }
       );
