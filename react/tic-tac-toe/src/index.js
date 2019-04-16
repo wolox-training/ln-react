@@ -1,28 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import { createStore, combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
 import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router';
 
+import createStore, { history } from './redux/store';
 import App from './app';
 import './config/i18n';
 import './scss/application.scss';
 import { register } from './serviceWorker';
 
-const reducer = combineReducers({
-  form: formReducer
-});
-
-const store = createStore(reducer);
+const store = createStore;
 
 const render = () => {
   ReactDOM.render(
-    <Provider store={store}>
-      <AppContainer>
-        <App />
-      </AppContainer>
-    </Provider>,
+    <AppContainer>
+      <Provider store={store}>
+        <App history={history} />
+      </Provider>
+    </AppContainer>,
     document.getElementById('root')
   );
 };

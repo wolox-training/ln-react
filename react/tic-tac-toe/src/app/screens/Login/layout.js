@@ -3,11 +3,11 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 import styles from './styles.module.scss';
-import { validate } from './validation';
+import FieldValidation from './validation/index';
 import { userInput, passInput } from './fields';
 
 const LoginForm = props => {
-  const { handleSubmit, reset } = props;
+  const { handleSubmit, isError } = props;
   return (
     <form className={styles.loginItem} onSubmit={handleSubmit}>
       <div className={styles.loginItem}>
@@ -16,6 +16,7 @@ const LoginForm = props => {
           component={userInput}
           type="text"
           label="User"
+          validate={[FieldValidation.required, FieldValidation.email]}
         />
       </div>
       <div className={styles.loginItem}>
@@ -24,16 +25,20 @@ const LoginForm = props => {
           component={passInput}
           type="password"
           label="Password"
+          validate={FieldValidation.passLenght}
         />
       </div>
+      {isError && (
+        <div className={styles.errorMsg}>
+          {isError}
+        </div>
+      )}
       <button className={styles.loginButton} type="sumbit">Login</button>
-      <button className={styles.loginButton} type="button" onClick={reset}>Clear</button>
     </form>
   );
 };
 
 export default reduxForm({
   // a unique name for the form
-  form: 'login',
-  validate
+  form: 'login'
 })(LoginForm);

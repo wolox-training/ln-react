@@ -42,7 +42,12 @@
 }
 
 .input-error {
-  margin-top: 5px;
+  margin: 10px 0;
   color: red;
-  font-weight: bold;
+}
+
+.error-msg {
+  color:red;
+  margin-bottom: 10px;
+  width: 100%
 }
