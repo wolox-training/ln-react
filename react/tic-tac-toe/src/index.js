@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'connected-react-router';
 
 import createStore, { history } from './redux/store';
 import App from './app';

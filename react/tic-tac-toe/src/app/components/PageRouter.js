@@ -13,7 +13,7 @@ class PageRouter extends Component {
       <ConnectedRouter history={history}>
         <Switch>
           <Route exact path="/" component={LoginFormContainer} />
-          <Route path="/game" render={props => (
+          <Route path="/game" render={() => (
             loggedIn ?
               <Game />
             : <Redirect to="/" />
