@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 
 import Topbar from '../Topbar/Topbar';
 import Game from '../../screens/Game';
+import GameHistory from '../../screens/GameHistory';
 import LoginFormContainer from '../../screens/Login';
 import LocalStorageService from '../../../services/LocalStorageService';
 
@@ -35,6 +36,10 @@ class PageRouter extends Component {
                 render={() => (token ? <Game /> : <Redirect to="/" />)}
               />
             )}
+            <Route
+              path="/gameHistory"
+              render={() => (token ? <GameHistory /> : <Redirect to="/" />)}
+            />
           </Switch>
         </Fragment>
       </ConnectedRouter>
