@@ -1,33 +1,56 @@
-import React, { Component } from 'react';
+/* eslint-disable react/jsx-no-bind */
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { Route, Switch, Redirect } from 'react-router';
+import PropTypes from 'prop-types';
 
 import Game from '../screens/Game';
 import LoginFormContainer from '../screens/Login';
+import LocalStorageService from '../../services/LocalStorageService';
 
 class PageRouter extends Component {
+  componentDidMount() {
+    const token = LocalStorageService.getToken();
+    this.props.inicializateApp(token);
+  }
+
   render() {
-    const { history, loggedIn } = this.props;
+    const { history, isLoading, token } = this.props;
     return (
       <ConnectedRouter history={history}>
         <Switch>
-          <Route exact path="/" component={LoginFormContainer} />
-          <Route path="/game" render={() => (
-            loggedIn ?
-              <Game />
-            : <Redirect to="/" />
-            )
-          }
+          <Route
+            exact path="/"
+            render={() => (token ? <Redirect to="/game" /> : <LoginFormContainer />)}
           />
+          { isLoading ? (
+            <Fragment />
+          ) : (
+            <Route
+              path="/game"
+              render={() => (token ? <Game /> : <Redirect to="/" />)}
+            />
+          )}
         </Switch>
       </ConnectedRouter>
     );
   }
 }
 
-const mapStateToProp = state => ({
-  loggedIn: state.login.loggedIn
+PageRouter.propTypes = {
+  inicializateApp: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  token: PropTypes.string
+};
+
+const mapDispatchToProp = dispatch => ({
+  inicializateApp: (token) => dispatch({ type: 'INIT', token })
 });
 
-export default connect(mapStateToProp)(PageRouter);
+const mapStateToProp = state => ({
+  isLoading: state.login.isLoading,
+  token: state.login.token
+});
+
+export default connect(mapStateToProp, mapDispatchToProp)(PageRouter);

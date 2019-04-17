@@ -1,4 +1,5 @@
 const initialState = {
+  isLoading: true,
   loggedIn: false,
   token: '',
   error: ''
@@ -6,12 +7,20 @@ const initialState = {
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    case 'CLEAR_LOGIN': return {
-      ...state,
-      loggedIn: false,
-      token: '',
-      error: ''
-    };
+    case 'INIT':
+      return {
+        ...state,
+        isLoading: false,
+        loggedIn: action.token !== null,
+        token: action.token
+      };
+    case 'CLEAR_LOGIN':
+      return {
+        ...state,
+        loggedIn: false,
+        token: '',
+        error: ''
+      };
     case 'GET_LOGIN_SUCCESS':
       return {
         ...state,
@@ -25,7 +34,7 @@ function reducer(state = initialState, action) {
         loggedIn: false
       };
     default:
-      return state;
+      return { ...state };
   }
 }
 

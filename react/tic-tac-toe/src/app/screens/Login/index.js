@@ -17,13 +17,17 @@ class LoginFormContainer extends Component {
   }
 
   render() {
-    const { error } = this.props;
+    const { error, isLoading } = this.props;
     return (
-      <div className={styles.login}>
-        <h1 className={styles.loginTitle}>Welcome</h1>
-        <LoginForm onSubmit={this.submit} isError={error} />
-      </div>
-    );
+      <div>
+        { isLoading ? (<div>Loading...</div>)
+          : (
+            <div className={styles.login}>
+              <h1 className={styles.loginTitle}>Welcome</h1>
+              <LoginForm onSubmit={this.submit} isError={error} />
+            </div>
+          )}
+      </div>);
   }
 }
 
@@ -34,7 +38,8 @@ const mapDispatchToProp = dispatch => ({
 const mapStateToProp = state => ({
   loggedIn: state.login.loggedIn,
   token: state.login.token,
-  error: state.login.error
+  error: state.login.error,
+  isLoading: state.login.isLoading
 });
 
 export default connect(mapStateToProp, mapDispatchToProp)(LoginFormContainer);
