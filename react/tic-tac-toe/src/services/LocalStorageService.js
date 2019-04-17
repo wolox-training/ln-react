@@ -1,4 +1,5 @@
 export default {
-  getToken: () => localStorage.getItem('token'),
-  setToken: (token) => localStorage.setItem('token', token)
+  getToken: (key) => localStorage.getItem(key),
+  setToken: (key, value) => localStorage.setItem(key, value),
+  deleteToken: (key) => localStorage.removeItem(key)
 };

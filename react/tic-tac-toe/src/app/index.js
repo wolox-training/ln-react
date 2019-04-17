@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import PageRouter from './components/PageRouter';
+import PageRouter from './components/PageRouter/PageRouter';
 
 import '../scss/application.scss';
 

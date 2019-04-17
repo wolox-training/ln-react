@@ -5,13 +5,14 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Route, Switch, Redirect } from 'react-router';
 import PropTypes from 'prop-types';
 
-import Game from '../screens/Game';
-import LoginFormContainer from '../screens/Login';
-import LocalStorageService from '../../services/LocalStorageService';
+import Topbar from '../Topbar/Topbar';
+import Game from '../../screens/Game';
+import LoginFormContainer from '../../screens/Login';
+import LocalStorageService from '../../../services/LocalStorageService';
 
 class PageRouter extends Component {
   componentDidMount() {
-    const token = LocalStorageService.getToken();
+    const token = LocalStorageService.getToken('token');
     this.props.inicializateApp(token);
   }
 
@@ -19,20 +20,23 @@ class PageRouter extends Component {
     const { history, isLoading, token } = this.props;
     return (
       <ConnectedRouter history={history}>
-        <Switch>
-          <Route
-            exact path="/"
-            render={() => (token ? <Redirect to="/game" /> : <LoginFormContainer />)}
-          />
-          { isLoading ? (
-            <Fragment />
-          ) : (
+        <Fragment>
+          { token ? <Topbar /> : <div /> }
+          <Switch>
             <Route
-              path="/game"
-              render={() => (token ? <Game /> : <Redirect to="/" />)}
+              exact path="/"
+              render={() => (token ? <Redirect to="/game" /> : <LoginFormContainer />)}
             />
-          )}
-        </Switch>
+            { isLoading ? (
+              <Fragment />
+            ) : (
+              <Route
+                path="/game"
+                render={() => (token ? <Game /> : <Redirect to="/" />)}
+              />
+            )}
+          </Switch>
+        </Fragment>
       </ConnectedRouter>
     );
   }

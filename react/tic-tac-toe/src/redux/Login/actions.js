@@ -1,8 +1,9 @@
 import { push } from 'connected-react-router';
 
 import LoginService from '../../services/LoginService';
+import LocalStorageService from '../../services/LocalStorageService';
 
-function getLogin(user, pass) {
+function login(user, pass) {
   return dispatch => {
     dispatch({ type: 'CLEAR_LOGIN' });
     LoginService.validateLogin(user, pass)
@@ -12,15 +13,24 @@ function getLogin(user, pass) {
             return dispatch({ type: 'GET_LOGIN_FAILURE', res });
           }
           dispatch({ type: 'GET_LOGIN_SUCCESS', res });
-          localStorage.setItem('token', res.data.token);
+          LocalStorageService.setToken('token', res.data.token);
           return dispatch(push('/game'));
         }
       );
   };
 }
 
+function logout() {
+  return dispatch => {
+    LocalStorageService.deleteToken('token');
+    dispatch({ type: 'LOGOUT' });
+    return dispatch(push('/'));
+  };
+}
+
 const actionCreators = {
-  getLogin
+  login,
+  logout
 };
 
 export default actionCreators;

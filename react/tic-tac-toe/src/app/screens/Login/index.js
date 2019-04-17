@@ -8,12 +8,12 @@ import styles from './styles.module.scss';
 import LoginForm from './layout';
 
 class LoginFormContainer extends Component {
-  getLogin = (user, pass) => {
-    this.props.getLogin(user, pass);
+  login = (user, pass) => {
+    this.props.login(user, pass);
   }
 
   submit = values => {
-    this.getLogin(values.user, values.pass);
+    this.login(values.user, values.pass);
   }
 
   render() {
@@ -32,7 +32,7 @@ class LoginFormContainer extends Component {
 }
 
 const mapDispatchToProp = dispatch => ({
-  getLogin: (user, pass) => dispatch(actionsCreators.getLogin(user, pass))
+  login: (user, pass) => dispatch(actionsCreators.login(user, pass))
 });
 
 const mapStateToProp = state => ({

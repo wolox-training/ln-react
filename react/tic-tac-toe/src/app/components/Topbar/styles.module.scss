@@ -1,0 +1,38 @@
+.topbar {
+  background-color: #282c34;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  width: 100%;
+  z-index: 9999;
+}
+
+.topbar-user-logo {
+  height: 20px;
+  margin-right: 5px;
+}
+
+.topbar-button {
+  align-items: center;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  width: 120px;
+  height: 50px;
+
+  &:hover {
+    background-color: #52565c;
+  }
+}
+
+.topbar-views-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.topbar-link {
+  color:rgba(255,255,255,.5);
+}

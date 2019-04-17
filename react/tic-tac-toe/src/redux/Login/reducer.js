@@ -33,6 +33,12 @@ function reducer(state = initialState, action) {
         error: action.res.status === 401 ? 'Login error. Invalid user or password.' : 'Login error.',
         loggedIn: false
       };
+    case 'LOGOUT':
+      return {
+        ...state,
+        token: '',
+        loggedIn: false
+      };
     default:
       return { ...state };
   }
