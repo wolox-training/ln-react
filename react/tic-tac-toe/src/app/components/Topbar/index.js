@@ -30,7 +30,7 @@ class Topbar extends Component {
           </Link>
         </div>
         <button className={styles.topbarButton} onClick={this.logout}>
-          <img className={styles.topbarUserLogo} src={userLogo} />
+          <img className={styles.topbarUserLogo} src={userLogo} alt="user logo" />
           <p className={styles.topbarLink}>Logout</p>
         </button>
       </header>

@@ -5,7 +5,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Route, Switch, Redirect } from 'react-router';
 import PropTypes from 'prop-types';
 
-import Topbar from '../Topbar/Topbar';
+import Topbar from '../Topbar';
 import Game from '../../screens/Game';
 import GameHistory from '../../screens/GameHistory';
 import LoginFormContainer from '../../screens/Login';

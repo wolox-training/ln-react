@@ -1,11 +1,8 @@
-/* eslint-disable no-negated-condition */
 import React, { Component } from 'react';
 
 import styles from './styles.module.scss';
 
 import MatchesService from '~services/MatchesService';
-
-//import api from '~config/api';
 
 const Spinner = require('react-spinkit');
 
@@ -25,7 +22,10 @@ class GameHistory extends Component {
             history: response.data
           });
         } else {
-          this.setState({ error: 'No se pudo cargar la información.' });
+          this.setState({
+            isLoading: false,
+            error: 'No se pudo cargar la información.'
+          });
         }
       });
   }
@@ -34,42 +34,40 @@ class GameHistory extends Component {
     this.getData();
   }
 
-  renderRow = item => {
-    return (
-      <tr key={item.id}>
-        <td>{item.player_one}</td>
-        <td>{item.player_two}</td>
-        <td>{item.winner}</td>
-      </tr>
-    );
-  }
+  renderRow = item => (
+    <tr key={item.id}>
+      <td>{item.player_one}</td>
+      <td>{item.player_two}</td>
+      <td>{item.winner}</td>
+      <td>{item.createdAt}</td>
+    </tr>
+  );
 
   render() {
+    if (this.state.isLoading) {
+      return <Spinner name="wandering-cubes" />;
+    }
+    if (this.state.error !== '') {
+      return (
+        <p>{this.state.error}</p>
+      );
+    }
     return (
       <div className={styles.historyContainer}>
-        {!this.state.isLoading ? (
-          <table className={styles.table}>
-            <thead className={styles.tableHead}>
-              <tr>
-                <th>Player 1</th>
-                <th>Player 2</th>
-                <th>Winner</th>
-              </tr>
-            </thead>
-            <tbody className={styles.tableBody}>
-              {this.state.history.map(this.renderRow)}
-            </tbody>
-          </table>
-        ) : (
-          this.state.error !== '' ? (
-            <p>{this.state.error}</p>
-          ) : (
-            <Spinner name="wandering-cubes" />
-          )
-        )
-        }
-      </div>
-    );
+        <table className={styles.table}>
+          <thead className={styles.tableHead}>
+            <tr>
+              <th>Player 1</th>
+              <th>Player 2</th>
+              <th>Winner</th>
+              <th className={styles.tableDateCol}>Date</th>
+            </tr>
+          </thead>
+          <tbody className={styles.tableBody}>
+            {this.state.history.map(this.renderRow)}
+          </tbody>
+        </table>
+      </div>);
   }
 }
 

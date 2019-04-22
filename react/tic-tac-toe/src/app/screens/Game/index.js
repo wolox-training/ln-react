@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import styles from './styles.module.scss';
 import Board from './components/Board';
-import GameHistory from '../GameHistory';
 
 function calculateWinner(squares) {
   const lines = [
