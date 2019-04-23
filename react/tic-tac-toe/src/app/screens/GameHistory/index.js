@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import MatchesService from '../../../services/MatchesService';
 
 import styles from './styles.module.scss';
-
-import MatchesService from '~services/MatchesService';
 
 const Spinner = require('react-spinkit');
 
 class GameHistory extends Component {
-  state = {
-    isLoading: true,
-    history: [],
-    error: ''
-  };
-
-  getData() {
+  /*getData() {
     MatchesService.getMatches()
       .then(response => {
         if (response.ok) {
@@ -28,10 +23,11 @@ class GameHistory extends Component {
           });
         }
       });
-  }
+  }*/
 
   componentDidMount() {
-    this.getData();
+    this.props.dispatch(MatchesService.getMatches());
+    //this.getData();
   }
 
   renderRow = item => (
@@ -44,12 +40,13 @@ class GameHistory extends Component {
   );
 
   render() {
-    if (this.state.isLoading) {
+    const {isLoading, error, history } = this.props;
+    if (isLoading) {
       return <Spinner name="wandering-cubes" />;
     }
-    if (this.state.error !== '') {
+    if (error && error !== '') {
       return (
-        <p>{this.state.error}</p>
+        <p>{error}</p>
       );
     }
     return (
@@ -64,11 +61,24 @@ class GameHistory extends Component {
             </tr>
           </thead>
           <tbody className={styles.tableBody}>
-            {this.state.history.map(this.renderRow)}
+            {history.map(this.renderRow)}
           </tbody>
         </table>
       </div>);
   }
 }
 
-export default GameHistory;
+GameHistory.defaultProps = {
+  // Initial state won't be declared so we use them with defaultProps
+  error: '',
+  history: [],
+  isLoading: true
+};
+
+const mapStateToProps = state => ({
+  history: state.matches && state.matches.matches,
+  isLoading: state.matches.matchesLoading,
+  error: state.matchesError && state.matches.matchesError
+});
+
+export default connect(mapStateToProps)(GameHistory);
