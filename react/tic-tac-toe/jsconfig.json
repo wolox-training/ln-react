@@ -6,6 +6,7 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
+      "*": ["types/*"],
       "~app/*": ["./src/app/*"],
       "~components/*": ["./src/app/components/*"],
       "~screens/*": ["./src/app/screens/*"],
