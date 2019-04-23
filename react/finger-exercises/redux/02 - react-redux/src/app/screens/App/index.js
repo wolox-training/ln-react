@@ -105,5 +105,4 @@ const mapStateToProp = state => ({
   originalData: state.books.originalData
 });
 
-export default connect(mapStateToProp, mapDispatchToProp)
-(App);
+export default connect(mapStateToProp, mapDispatchToProp)(App);
