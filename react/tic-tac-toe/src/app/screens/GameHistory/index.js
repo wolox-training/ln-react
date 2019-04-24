@@ -1,33 +1,19 @@
+/* eslint-disable camelcase */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import MatchesService from '../../../services/MatchesService';
+import withLoading from '../../../hocs/Loading/index';
 
 import styles from './styles.module.scss';
 
-const Spinner = require('react-spinkit');
+//const Spinner = require('react-spinkit');
+
 
 class GameHistory extends Component {
-  /*getData() {
-    MatchesService.getMatches()
-      .then(response => {
-        if (response.ok) {
-          this.setState({
-            isLoading: false,
-            history: response.data
-          });
-        } else {
-          this.setState({
-            isLoading: false,
-            error: 'No se pudo cargar la información.'
-          });
-        }
-      });
-  }*/
-
   componentDidMount() {
     this.props.dispatch(MatchesService.getMatches());
-    //this.getData();
   }
 
   renderRow = item => (
@@ -40,15 +26,7 @@ class GameHistory extends Component {
   );
 
   render() {
-    const {isLoading, error, history } = this.props;
-    if (isLoading) {
-      return <Spinner name="wandering-cubes" />;
-    }
-    if (error && error !== '') {
-      return (
-        <p>{error}</p>
-      );
-    }
+    const { history } = this.props;
     return (
       <div className={styles.historyContainer}>
         <table className={styles.table}>
@@ -68,6 +46,18 @@ class GameHistory extends Component {
   }
 }
 
+GameHistory.propTypes = {
+  error: PropTypes.string,
+  history: PropTypes.shape({
+    createdAt: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    player_one: PropTypes.string.isRequired,
+    player_two: PropTypes.string.isRequired,
+    winner: PropTypes.string.isRequired
+  }),
+  isLoading: PropTypes.bool
+};
+
 GameHistory.defaultProps = {
   // Initial state won't be declared so we use them with defaultProps
   error: '',
@@ -78,7 +68,9 @@ GameHistory.defaultProps = {
 const mapStateToProps = state => ({
   history: state.matches && state.matches.matches,
   isLoading: state.matches.matchesLoading,
-  error: state.matchesError && state.matches.matchesError
+  error: state.matches.matchesError
 });
 
-export default connect(mapStateToProps)(GameHistory);
+const GameHistoryWithLoading = withLoading(GameHistory);
+
+export default connect(mapStateToProps)(GameHistoryWithLoading);

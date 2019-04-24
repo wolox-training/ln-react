@@ -17,6 +17,8 @@ class PageRouter extends Component {
     this.props.inicializateApp(token);
   }
 
+  // <AuthenticatedRoute public path="/game" component=Game />
+
   render() {
     const { history, isLoading, token } = this.props;
     return (
