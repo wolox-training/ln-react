@@ -58,6 +58,7 @@ class Game extends React.Component {
   }
 
   render() {
+    const { isLoading } = this.props;
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
@@ -81,18 +82,22 @@ class Game extends React.Component {
     }
 
     return (
-      <div className={styles.game}>
-        <div className={styles.gameBoard}>
-          <Board
-            squares={current.squares}
-            onClick={this.handleClick}
-          />
+      isLoading ? (
+        <div />
+      ) : (
+        <div className={styles.game}>
+          <div className={styles.gameBoard}>
+            <Board
+              squares={current.squares}
+              onClick={this.handleClick}
+            />
+          </div>
+          <div className={styles.gameInfo}>
+            <div>{status}</div>
+            <ol>{moves}</ol>
+          </div>
         </div>
-        <div className={styles.gameInfo}>
-          <div>{status}</div>
-          <ol>{moves}</ol>
-        </div>
-      </div>
+      )
     );
   }
 }

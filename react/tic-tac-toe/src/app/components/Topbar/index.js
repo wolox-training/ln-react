@@ -9,13 +9,10 @@ import userLogo from '../../assets/user-logo.svg';
 
 import styles from './styles.module.scss';
 
-class Topbar extends Component {
-  logout = () => {
-    this.props.logout();
-  };
-
-  render() {
-    return (
+const Topbar = props => {
+  const { logout, token } = props;
+  return (
+    token ? (
       <header className={styles.topbar}>
         <div className={styles.topbarViewsButtons}>
           <Link to="/game">
@@ -29,17 +26,20 @@ class Topbar extends Component {
             </button>
           </Link>
         </div>
-        <button className={styles.topbarButton} onClick={this.logout}>
+        <button className={styles.topbarButton} onClick={logout}>
           <img className={styles.topbarUserLogo} src={userLogo} alt="user logo" />
           <p className={styles.topbarLink}>Logout</p>
         </button>
       </header>
-    );
-  }
-}
+    ) : (
+      <div />
+    )
+  );
+};
 
 Topbar.propTypes = {
-  logout: PropTypes.func.isRequired
+  logout: PropTypes.func.isRequired,
+  token: PropTypes.string
 };
 
 const mapDispatchToProp = dispatch => ({

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
+import Spinner from 'react-spinkit';
 
 import styles from './styles.module.scss';
 
 import MatchesService from '~services/MatchesService';
-
-const Spinner = require('react-spinkit');
 
 class GameHistory extends Component {
   state = {
@@ -13,7 +12,7 @@ class GameHistory extends Component {
     error: ''
   };
 
-  getData() {
+  getData = () => {
     MatchesService.getMatches()
       .then(response => {
         if (response.ok) {
