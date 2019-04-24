@@ -9,7 +9,7 @@ import userLogo from '../../assets/user-logo.svg';
 
 import styles from './styles.module.scss';
 
-const Topbar = props => {
+function Topbar(props) {
   const { logout, token } = props;
   return (
     token ? (
@@ -35,7 +35,7 @@ const Topbar = props => {
       <div />
     )
   );
-};
+}
 
 Topbar.propTypes = {
   logout: PropTypes.func.isRequired,
