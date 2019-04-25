@@ -69,6 +69,7 @@ App.propTypes = {
   originalData: PropTypes.array.isRequired
 };
 
+
 const mapDispatchToProps = dispatch => ({
   getBooks: () => dispatch(actionsCreators.getBooks()),
   searchBook: value => dispatch(actionsCreators.searchBook(value)),
