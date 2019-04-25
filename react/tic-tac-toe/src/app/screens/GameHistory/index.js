@@ -5,29 +5,9 @@ import MatchesService from '../../../services/MatchesService';
 
 import styles from './styles.module.scss';
 
-const Spinner = require('react-spinkit');
-
 class GameHistory extends Component {
-  /*getData() {
-    MatchesService.getMatches()
-      .then(response => {
-        if (response.ok) {
-          this.setState({
-            isLoading: false,
-            history: response.data
-          });
-        } else {
-          this.setState({
-            isLoading: false,
-            error: 'No se pudo cargar la información.'
-          });
-        }
-      });
-  }*/
-
   componentDidMount() {
     this.props.dispatch(MatchesService.getMatches());
-    //this.getData();
   }
 
   renderRow = item => (

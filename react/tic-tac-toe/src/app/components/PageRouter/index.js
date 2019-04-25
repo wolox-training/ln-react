@@ -22,20 +22,16 @@ class PageRouter extends Component {
     return (
       <ConnectedRouter history={history}>
         <Fragment>
-          { token ? <Topbar /> : <div /> }
+          <Topbar />
           <Switch>
             <Route
               exact path="/"
               render={() => (token ? <Redirect to="/game" /> : <LoginFormContainer />)}
             />
-            { isLoading ? (
-              <Fragment />
-            ) : (
-              <Route
-                path="/game"
-                render={() => (token ? <Game /> : <Redirect to="/" />)}
-              />
-            )}
+            <Route
+              path="/game"
+              render={() => (token ? <Game /> : <Redirect to="/" />)}
+            />
             <Route
               path="/gameHistory"
               render={() => (token ? <GameHistory /> : <Redirect to="/" />)}

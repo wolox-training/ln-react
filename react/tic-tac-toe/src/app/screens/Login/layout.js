@@ -4,7 +4,8 @@ import { Field, reduxForm } from 'redux-form';
 
 import styles from './styles.module.scss';
 import FieldValidation from './validation/index';
-import { userInput, passInput } from './fields';
+import UserInput from './fields/UserInput';
+import PassInput from './fields/PassInput';
 
 const LoginForm = props => {
   const { handleSubmit, isError } = props;
@@ -13,7 +14,7 @@ const LoginForm = props => {
       <div className={styles.loginItem}>
         <Field
           name="user"
-          component={userInput}
+          component={UserInput}
           type="text"
           label="User"
           validate={[FieldValidation.required, FieldValidation.email]}
@@ -22,7 +23,7 @@ const LoginForm = props => {
       <div className={styles.loginItem}>
         <Field
           name="pass"
-          component={passInput}
+          component={PassInput}
           type="password"
           label="Password"
           validate={FieldValidation.passLenght}
