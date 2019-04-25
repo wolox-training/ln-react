@@ -1,20 +1,22 @@
 .history-container {
-  width: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .table {
-  margin-left: 15px;
-  border: 1px solid;
-  width: 100%;
+  width: 600px;
 }
 
 .table-head {
-  border: 1px solid;
+  background-color: #282c34;
+  color:rgba(255, 255, 255, 0.5);
 }
 
 .table-body {
   text-align: center;
+}
+
+.table-date-col {
+  width: 230px;
 }

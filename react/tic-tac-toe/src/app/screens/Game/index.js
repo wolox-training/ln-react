@@ -1,8 +1,28 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import styles from './styles.module.scss';
 import Board from './components/Board';
-import GameHistory from './components/GameHistory';
+
+function calculateWinner(squares) {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+  ];
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return squares[a];
+    }
+  }
+  return null;
+}
 
 class Game extends React.Component {
   state = {
@@ -23,7 +43,7 @@ class Game extends React.Component {
     squares[i] = this.state.xIsNext ? 'X' : 'O';
     this.setState(prevState => ({
       history: history.concat([{
-        squares: squares
+        squares
       }]),
       stepNumber: history.length,
       xIsNext: !prevState.xIsNext
@@ -33,11 +53,12 @@ class Game extends React.Component {
   jumpTo(step) {
     this.setState({
       stepNumber: step,
-      xIsNext: (step % 2) === 0
+      xIsNext: step % 2 === 0
     });
   }
 
   render() {
+    const { isLoading } = this.props;
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
@@ -61,40 +82,28 @@ class Game extends React.Component {
     }
 
     return (
-      <div className={styles.game}>
-        <div className={styles.gameBoard}>
-          <Board
-            squares={current.squares}
-            onClick={this.handleClick} />
+      isLoading ? (
+        <div />
+      ) : (
+        <div className={styles.game}>
+          <div className={styles.gameBoard}>
+            <Board
+              squares={current.squares}
+              onClick={this.handleClick}
+            />
+          </div>
+          <div className={styles.gameInfo}>
+            <div>{status}</div>
+            <ol>{moves}</ol>
+          </div>
         </div>
-        <div className={styles.gameInfo}>
-          <div>{status}</div>
-          <ol>{moves}</ol>
-        </div>
-        <GameHistory />
-      </div>
+      )
     );
   }
 }
 
-export default Game;
+const mapStateToProp = state => ({
+  isLoading: state.login.isLoading
+});
 
-function calculateWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
-    }
-  }
-  return null;
-}
+export default connect(mapStateToProp)(Game);

@@ -24,7 +24,7 @@ function reducer(state = initialState, action) {
         ...state,
         bookSelected: state.bookSelected.map(obj => {
           if (obj.id === action.payload) {
-            return { ...obj, quantity: obj.quantity + 1 };
+            obj.quantity += 1;
           }
           return obj;
         })

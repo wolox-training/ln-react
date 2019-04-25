@@ -1,11 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import Game from './screens/Game';
+import PageRouter from './components/PageRouter/index';
 
 import '../scss/application.scss';
 
-function App() {
-  return <Game />;
-}
+const App = ({ history }) => (
+  <PageRouter history={history} />
+);
 
-export default App;
+App.propTypes = {
+  history: PropTypes.object //splice para estructura de objeto
+};
+
+const mapStateToProp = state => ({
+  loggedIn: state.login.loggedIn,
+  token: state.login.token,
+  error: state.login.error
+});
+
+export default connect(mapStateToProp)(App);

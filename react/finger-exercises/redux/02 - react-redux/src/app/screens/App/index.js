@@ -16,34 +16,14 @@ class App extends Component {
     this.props.getBooks();
   }
 
-  // TODO to implement the dispatch
-  onSearch = value => {
-    this.props.searchBook(value);
-  };
-
-  // TODO to implement the dispatch
-  addToCart = item => {
-    this.props.addToCart(item);
-  };
-
-  // TODO to implement the dispatch
-  addItem = itemId => {
-    this.props.addItem(itemId);
-  };
-
-  // TODO to implement the dispatch
-  removeItem = itemId => {
-    this.props.removeItem(itemId);
-  };
-
   CONFIGURATION_BUTTON = {
     add: {
       text: 'Add to cart',
-      function: this.addToCart
+      function: this.props.addToCart
     },
     remove: {
       text: 'Remove',
-      function: this.removeItem,
+      function: this.props.removeItem,
       isDanger: true
     }
   };
@@ -55,12 +35,12 @@ class App extends Component {
   };
 
   render() {
-    const { books, bookSelected } = this.props;
+    const { books, bookSelected, searchBook, addItem, removeItem } = this.props;
     return (
       <Fragment>
         <Navbar />
         <div className={styles.container}>
-          <Search onSearch={this.onSearch} />
+          <Search onSearch={searchBook} />
           {books.length ? (
             books.map(this.renderBooks)
           ) : (
@@ -70,7 +50,7 @@ class App extends Component {
           )}
         </div>
         {bookSelected.length ? (
-          <ShoppingCart data={bookSelected} addItem={this.addItem} removeItem={this.removeItem} />
+          <ShoppingCart data={bookSelected} addItem={addItem} removeItem={removeItem} />
         ) : null}
         <Footer />
       </Fragment>
@@ -78,20 +58,19 @@ class App extends Component {
   }
 }
 
-App.PropTypes = {
-  //Store Functions
+App.propTypes = {
   getBooks: PropTypes.func.isRequired,
   searchBook: PropTypes.func.isRequired,
   addToCart: PropTypes.func.isRequired,
   removeItem: PropTypes.func.isRequired,
   addItem: PropTypes.func.isRequired,
-  //States
   books: PropTypes.array.isRequired,
   bookSelected: PropTypes.array,
   originalData: PropTypes.array.isRequired
 };
 
-const mapDispatchToProp = dispatch => ({
+
+const mapDispatchToProps = dispatch => ({
   getBooks: () => dispatch(actionsCreators.getBooks()),
   searchBook: value => dispatch(actionsCreators.searchBook(value)),
   addToCart: item => dispatch(actionsCreators.addToCart(item)),
@@ -99,11 +78,10 @@ const mapDispatchToProp = dispatch => ({
   addItem: itemId => dispatch(actionsCreators.addItem(itemId))
 });
 
-const mapStateToProp = state => ({
+const mapStateToProps = state => ({
   books: state.books.books,
   bookSelected: state.books.bookSelected,
   originalData: state.books.originalData
 });
 
-export default connect(mapStateToProp, mapDispatchToProp)
-(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
