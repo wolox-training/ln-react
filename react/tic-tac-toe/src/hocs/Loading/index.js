@@ -1,7 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
-
-const Spinner = require('react-spinkit');
+import Spinner from 'react-spinkit';
 
 function withLoading(WrappedComponent) {
   return class extends Component {

@@ -4,14 +4,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import MatchesService from '../../../services/MatchesService';
-import withLoading from '../../../hocs/Loading/index';
 
+import GameHistoryWithLoading from './layout';
 import styles from './styles.module.scss';
 
-//const Spinner = require('react-spinkit');
-
-
-class GameHistory extends Component {
+class GameHistoryContainer extends Component {
   componentDidMount() {
     this.props.dispatch(MatchesService.getMatches());
   }
@@ -26,27 +23,15 @@ class GameHistory extends Component {
   );
 
   render() {
-    const { history } = this.props;
     return (
       <div className={styles.historyContainer}>
-        <table className={styles.table}>
-          <thead className={styles.tableHead}>
-            <tr>
-              <th>Player 1</th>
-              <th>Player 2</th>
-              <th>Winner</th>
-              <th className={styles.tableDateCol}>Date</th>
-            </tr>
-          </thead>
-          <tbody className={styles.tableBody}>
-            {history.map(this.renderRow)}
-          </tbody>
-        </table>
-      </div>);
+        <GameHistoryWithLoading renderRow={this.renderRow} {...this.props} />
+      </div>
+    );
   }
 }
 
-GameHistory.propTypes = {
+GameHistoryContainer.propTypes = {
   error: PropTypes.string,
   history: PropTypes.shape({
     createdAt: PropTypes.string.isRequired,
@@ -58,7 +43,7 @@ GameHistory.propTypes = {
   isLoading: PropTypes.bool
 };
 
-GameHistory.defaultProps = {
+GameHistoryContainer.defaultProps = {
   // Initial state won't be declared so we use them with defaultProps
   error: '',
   history: [],
@@ -71,6 +56,4 @@ const mapStateToProps = state => ({
   error: state.matches.matchesError
 });
 
-const GameHistoryWithLoading = withLoading(GameHistory);
-
-export default connect(mapStateToProps)(GameHistoryWithLoading);
+export default connect(mapStateToProps)(GameHistoryContainer);
