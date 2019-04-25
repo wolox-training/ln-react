@@ -1,15 +1,15 @@
-/* eslint-disable react/jsx-no-bind */
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
-import { Route, Switch, Redirect } from 'react-router';
+import { Switch } from 'react-router';
 import PropTypes from 'prop-types';
 
-import Topbar from '../Topbar';
 import Game from '../../screens/Game';
 import GameHistory from '../../screens/GameHistory';
 import LoginFormContainer from '../../screens/Login';
 import LocalStorageService from '../../../services/LocalStorageService';
+
+import AuthenticatedRoute from './AuthenticatedRoute/index';
 
 class PageRouter extends Component {
   componentDidMount() {
@@ -18,26 +18,14 @@ class PageRouter extends Component {
   }
 
   render() {
-    const { history, isLoading, token } = this.props;
+    const { history } = this.props;
     return (
       <ConnectedRouter history={history}>
-        <Fragment>
-          <Topbar />
-          <Switch>
-            <Route
-              exact path="/"
-              render={() => (token ? <Redirect to="/game" /> : <LoginFormContainer />)}
-            />
-            <Route
-              path="/game"
-              render={() => (token ? <Game /> : <Redirect to="/" />)}
-            />
-            <Route
-              path="/gameHistory"
-              render={() => (token ? <GameHistory /> : <Redirect to="/" />)}
-            />
-          </Switch>
-        </Fragment>
+        <Switch>
+          <AuthenticatedRoute auth={false} exact path="/" component={LoginFormContainer} {...this.props} />
+          <AuthenticatedRoute auth path="/game" component={Game} {...this.props} />
+          <AuthenticatedRoute auth path="/gameHistory" component={GameHistory} {...this.props} />
+        </Switch>
       </ConnectedRouter>
     );
   }
@@ -46,16 +34,16 @@ class PageRouter extends Component {
 PageRouter.propTypes = {
   inicializateApp: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  token: PropTypes.string
+  token: PropTypes.string.isRequired
 };
 
-const mapDispatchToProp = dispatch => ({
+const mapDispatchToProps = dispatch => ({
   inicializateApp: (token) => dispatch({ type: 'INIT', token })
 });
 
-const mapStateToProp = state => ({
+const mapStateToProps = state => ({
   isLoading: state.login.isLoading,
   token: state.login.token
 });
 
-export default connect(mapStateToProp, mapDispatchToProp)(PageRouter);
+export default connect(mapStateToProps, mapDispatchToProps)(PageRouter);

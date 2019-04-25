@@ -1,36 +1,16 @@
+/* eslint-disable camelcase */
 import React, { Component } from 'react';
-import Spinner from 'react-spinkit';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
+import MatchesService from '../../../services/MatchesService';
+
+import GameHistoryWithLoading from './layout';
 import styles from './styles.module.scss';
 
-import MatchesService from '~services/MatchesService';
-
-class GameHistory extends Component {
-  state = {
-    isLoading: true,
-    history: [],
-    error: ''
-  };
-
-  getData = () => {
-    MatchesService.getMatches()
-      .then(response => {
-        if (response.ok) {
-          this.setState({
-            isLoading: false,
-            history: response.data
-          });
-        } else {
-          this.setState({
-            isLoading: false,
-            error: 'No se pudo cargar la información.'
-          });
-        }
-      });
-  }
-
+class GameHistoryContainer extends Component {
   componentDidMount() {
-    this.getData();
+    this.props.dispatch(MatchesService.getMatches());
   }
 
   renderRow = item => (
@@ -43,31 +23,38 @@ class GameHistory extends Component {
   );
 
   render() {
-    if (this.state.isLoading) {
-      return <Spinner name="wandering-cubes" />;
-    }
-    if (this.state.error !== '') {
-      return (
-        <p>{this.state.error}</p>
-      );
-    }
     return (
       <div className={styles.historyContainer}>
-        <table className={styles.table}>
-          <thead className={styles.tableHead}>
-            <tr>
-              <th>Player 1</th>
-              <th>Player 2</th>
-              <th>Winner</th>
-              <th className={styles.tableDateCol}>Date</th>
-            </tr>
-          </thead>
-          <tbody className={styles.tableBody}>
-            {this.state.history.map(this.renderRow)}
-          </tbody>
-        </table>
-      </div>);
+        <GameHistoryWithLoading renderRow={this.renderRow} {...this.props} />
+      </div>
+    );
   }
 }
 
-export default GameHistory;
+GameHistoryContainer.propTypes = {
+  error: PropTypes.string,
+  history: PropTypes.arrayOf(
+    PropTypes.shape({
+      createdAt: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      player_one: PropTypes.string.isRequired,
+      player_two: PropTypes.string.isRequired,
+      winner: PropTypes.string.isRequired
+    })),
+  isLoading: PropTypes.bool
+};
+
+GameHistoryContainer.defaultProps = {
+  // Initial state won't be declared so we use them with defaultProps
+  error: '',
+  history: [],
+  isLoading: true
+};
+
+const mapStateToProps = state => ({
+  history: state.matches && state.matches.matches,
+  isLoading: state.matches.matchesLoading,
+  error: state.matches.matchesError
+});
+
+export default connect(mapStateToProps)(GameHistoryContainer);
