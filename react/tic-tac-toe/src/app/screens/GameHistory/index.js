@@ -33,13 +33,14 @@ class GameHistoryContainer extends Component {
 
 GameHistoryContainer.propTypes = {
   error: PropTypes.string,
-  history: PropTypes.shape({
-    createdAt: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
-    player_one: PropTypes.string.isRequired,
-    player_two: PropTypes.string.isRequired,
-    winner: PropTypes.string.isRequired
-  }),
+  history: PropTypes.arrayOf(
+    PropTypes.shape({
+      createdAt: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      player_one: PropTypes.string.isRequired,
+      player_two: PropTypes.string.isRequired,
+      winner: PropTypes.string.isRequired
+    })),
   isLoading: PropTypes.bool
 };
 

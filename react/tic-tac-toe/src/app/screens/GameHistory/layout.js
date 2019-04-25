@@ -24,13 +24,14 @@ function GameHistory({ renderRow, history }) {
 
 GameHistory.propTypes = {
   renderRow: PropTypes.func.isRequired,
-  history: PropTypes.shape({
-    createdAt: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
-    player_one: PropTypes.string.isRequired,
-    player_two: PropTypes.string.isRequired,
-    winner: PropTypes.string.isRequired
-  })
+  history: PropTypes.arrayOf(
+    PropTypes.shape({
+      createdAt: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      player_one: PropTypes.string.isRequired,
+      player_two: PropTypes.string.isRequired,
+      winner: PropTypes.string.isRequired
+    }))
 };
 
 export default withLoading(GameHistory);
