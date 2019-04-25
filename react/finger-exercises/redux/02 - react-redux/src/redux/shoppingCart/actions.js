@@ -4,8 +4,7 @@ export const actions = {
 
 const actionsCreators = {
   toggleContent: () => ({
-    type: actions.TOOGLE_CONTENT,
-    open
+    type: actions.TOOGLE_CONTENT
   })
 };
 

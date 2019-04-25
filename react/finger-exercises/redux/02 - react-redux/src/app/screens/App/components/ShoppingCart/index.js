@@ -10,10 +10,6 @@ import Item from './components/Item';
 import styles from './styles.scss';
 
 class ShoppingCart extends Component {
-  toggleContent = () => {
-    this.props.toggleContent();
-  };
-
   total = (accumulator, currentValue) => accumulator + currentValue.quantity;
 
   renderItem = item => {
@@ -25,7 +21,7 @@ class ShoppingCart extends Component {
     const { data } = this.props;
     return (
       <Fragment>
-        <Button className={styles.buttonCart} onClick={this.toggleContent}>
+        <Button className={styles.buttonCart} onClick={this.props.toggleContent}>
           <i className="fa fa-shopping-cart" />
         </Button>
         <div className={`${styles.container} ${this.props.open ? styles.open : ''}`}>
