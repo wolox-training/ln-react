@@ -10,7 +10,7 @@ import userLogo from '../../assets/user-logo.svg';
 import styles from './styles.module.scss';
 
 function Topbar(props) {
-  const { logout, token } = props;
+  const { logout, token, userName } = props;
   return (
     token ? (
       <header className={styles.topbar}>
@@ -26,10 +26,13 @@ function Topbar(props) {
             </button>
           </Link>
         </div>
-        <button className={styles.topbarButton} onClick={logout}>
-          <img className={styles.topbarUserLogo} src={userLogo} alt="user logo" />
-          <p className={styles.topbarLink}>Logout</p>
-        </button>
+        <div className={styles.topbarViewsButtons}>
+          <h6 className={styles.topbarUsername}>¡Welcome {userName}!</h6>
+          <button className={styles.topbarButton} onClick={logout}>
+            <img className={styles.topbarUserLogo} src={userLogo} alt="user logo" />
+            <p className={styles.topbarLink}>Logout</p>
+          </button>
+        </div>
       </header>
     ) : (
       <div />
@@ -39,7 +42,8 @@ function Topbar(props) {
 
 Topbar.propTypes = {
   logout: PropTypes.func.isRequired,
-  token: PropTypes.string
+  token: PropTypes.string,
+  userName: PropTypes.string
 };
 
 const mapDispatchToProp = dispatch => ({
@@ -47,7 +51,9 @@ const mapDispatchToProp = dispatch => ({
 });
 
 const mapStateToProp = state => ({
-  token: state.login.token
+  token: state.login.token,
+  userName: state.login.userName
 });
+
 
 export default connect(mapStateToProp, mapDispatchToProp)(Topbar);

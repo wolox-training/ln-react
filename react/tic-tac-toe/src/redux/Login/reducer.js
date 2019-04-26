@@ -2,38 +2,41 @@ const initialState = {
   isLoading: true,
   loggedIn: false,
   token: '',
-  error: ''
+  error: '',
+  userName: ''
 };
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    case 'INIT':
+    case '@@login/INIT':
       return {
         ...state,
         isLoading: false,
         loggedIn: action.token !== null,
-        token: action.token
+        token: action.payload.token,
+        userName: action.payload.userName
       };
-    case 'CLEAR_LOGIN':
+    case '@@login/CLEAR_LOGIN':
       return {
         ...state,
         loggedIn: false,
         token: '',
         error: ''
       };
-    case 'GET_LOGIN_SUCCESS':
+    case '@@login/GET_LOGIN_SUCCESS':
       return {
         ...state,
-        token: action.res.data.token,
+        token: action.data.res.data.token,
+        userName: action.data.user,
         loggedIn: true
       };
-    case 'GET_LOGIN_FAILURE':
+    case '@@login/GET_LOGIN_FAILURE':
       return {
         ...state,
         error: action.res.status === 401 ? 'Login error. Invalid user or password.' : 'Login error.',
         loggedIn: false
       };
-    case 'LOGOUT':
+    case '@@login/LOGOUT':
       return {
         ...state,
         token: '',

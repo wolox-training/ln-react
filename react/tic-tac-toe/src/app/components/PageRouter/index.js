@@ -14,7 +14,8 @@ import AuthenticatedRoute from './AuthenticatedRoute/index';
 class PageRouter extends Component {
   componentDidMount() {
     const token = LocalStorageService.getToken('token');
-    this.props.inicializateApp(token);
+    const userName = LocalStorageService.getToken('userName');
+    this.props.inicializateApp(token, userName);
   }
 
   render() {
@@ -34,16 +35,18 @@ class PageRouter extends Component {
 PageRouter.propTypes = {
   inicializateApp: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  token: PropTypes.string.isRequired
+  token: PropTypes.string.isRequired,
+  userName: PropTypes.string.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({
-  inicializateApp: (token) => dispatch({ type: 'INIT', token })
+  inicializateApp: (token, userName) => dispatch({ type: '@@login/INIT', payload: { token, userName } })
 });
 
 const mapStateToProps = state => ({
   isLoading: state.login.isLoading,
-  token: state.login.token
+  token: state.login.token,
+  userName: state.login.userName
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PageRouter);
