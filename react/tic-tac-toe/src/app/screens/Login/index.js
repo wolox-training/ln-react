@@ -20,7 +20,7 @@ class LoginFormContainer extends Component {
         { isLoading ? (<div>Loading...</div>)
           : (
             <div className={styles.login}>
-              <h1 className={styles.loginTitle}>login</h1>
+              <h1 className={styles.loginTitle}>Login</h1>
               <LoginForm onSubmit={this.submit} isError={error} />
             </div>
           )}
