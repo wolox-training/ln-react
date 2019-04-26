@@ -11,7 +11,7 @@ const login = (user, pass) => dispatch => {
         if (!res.ok) {
           return dispatch({ type: '@@login/GET_LOGIN_FAILURE', res });
         }
-        dispatch({ type: '@@login/GET_LOGIN_SUCCESS', data: { res, user } });
+        dispatch({ type: '@@login/GET_LOGIN_SUCCESS', payload: { res, user } });
         LocalStorageService.setToken('token', res.data.token);
         LocalStorageService.setToken('userName', user);
         return dispatch(push('/game'));

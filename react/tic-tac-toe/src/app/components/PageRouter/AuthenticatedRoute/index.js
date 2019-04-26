@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import Topbar from '../../Topbar';
 
-function AuthenticatedRoute({ auth, isLoading, token, path, component }) {
+function AuthenticatedRoute({ auth, isLoading, token, userName, path, component }) {
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -13,7 +13,7 @@ function AuthenticatedRoute({ auth, isLoading, token, path, component }) {
   if (auth) {
     return (
       <div>
-        { token ? <Topbar /> : <div /> }
+        { token ? <Topbar userName={userName} /> : <div /> }
         { token ? (
           <Route
             path={path}
@@ -44,7 +44,8 @@ AuthenticatedRoute.propTypes = {
   component: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   path: PropTypes.string.isRequired,
-  token: PropTypes.string
+  token: PropTypes.string,
+  userName: PropTypes.string
 };
 
 export default AuthenticatedRoute;

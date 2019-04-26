@@ -35,8 +35,8 @@ class PageRouter extends Component {
 PageRouter.propTypes = {
   inicializateApp: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  token: PropTypes.string.isRequired,
-  userName: PropTypes.string.isRequired
+  token: PropTypes.string,
+  userName: PropTypes.string
 };
 
 const mapDispatchToProps = dispatch => ({

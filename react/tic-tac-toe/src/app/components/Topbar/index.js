@@ -10,50 +10,38 @@ import userLogo from '../../assets/user-logo.svg';
 import styles from './styles.module.scss';
 
 function Topbar(props) {
-  const { logout, token, userName } = props;
+  const { logout, userName } = props;
   return (
-    token ? (
-      <header className={styles.topbar}>
-        <div className={styles.topbarViewsButtons}>
-          <Link to="/game">
-            <button className={styles.topbarButton}>
-              <p className={styles.topbarLink}>Tic Tac Toe</p>
-            </button>
-          </Link>
-          <Link to="/gameHistory">
-            <button className={styles.topbarButton}>
-              <p className={styles.topbarLink}>Game History</p>
-            </button>
-          </Link>
-        </div>
-        <div className={styles.topbarViewsButtons}>
-          <h6 className={styles.topbarUsername}>¡Welcome {userName}!</h6>
-          <button className={styles.topbarButton} onClick={logout}>
-            <img className={styles.topbarUserLogo} src={userLogo} alt="user logo" />
-            <p className={styles.topbarLink}>Logout</p>
+    <header className={styles.topbar}>
+      <div className={styles.topbarViewsButtons}>
+        <Link to="/game">
+          <button className={styles.topbarButton}>
+            <p className={styles.topbarLink}>Tic Tac Toe</p>
           </button>
-        </div>
-      </header>
-    ) : (
-      <div />
-    )
+        </Link>
+        <Link to="/gameHistory">
+          <button className={styles.topbarButton}>
+            <p className={styles.topbarLink}>Game History</p>
+          </button>
+        </Link>
+      </div>
+      <div className={styles.topbarViewsButtons}>
+        <h6 className={styles.topbarUsername}>¡Welcome {userName}!</h6>
+        <button className={styles.topbarButton} onClick={logout}>
+          <img className={styles.topbarUserLogo} src={userLogo} alt="user logo" />
+          <p className={styles.topbarLink}>Logout</p>
+        </button>
+      </div>
+    </header>
   );
 }
 
 Topbar.propTypes = {
-  logout: PropTypes.func.isRequired,
-  token: PropTypes.string,
-  userName: PropTypes.string
+  logout: PropTypes.func.isRequired
 };
 
-const mapDispatchToProp = dispatch => ({
+const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(actionsCreators.logout())
 });
 
-const mapStateToProp = state => ({
-  token: state.login.token,
-  userName: state.login.userName
-});
-
-
-export default connect(mapStateToProp, mapDispatchToProp)(Topbar);
+export default connect(null, mapDispatchToProps)(Topbar);

@@ -1,6 +1,7 @@
 /* eslint-disable react/no-typos */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import actionsCreators from '../../../redux/Login/actions';
 
@@ -8,12 +9,8 @@ import styles from './styles.module.scss';
 import LoginForm from './layout';
 
 class LoginFormContainer extends Component {
-  login = (user, pass) => {
-    this.props.login(user, pass);
-  }
-
   submit = values => {
-    this.login(values.user, values.pass);
+    this.props.login(values.user, values.pass);
   }
 
   render() {
@@ -31,15 +28,20 @@ class LoginFormContainer extends Component {
   }
 }
 
-const mapDispatchToProp = dispatch => ({
+LoginFormContainer.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  login: PropTypes.func.isRequired,
+  error: PropTypes.string
+};
+
+const mapDispatchToProps = dispatch => ({
   login: (user, pass) => dispatch(actionsCreators.login(user, pass))
 });
 
-const mapStateToProp = state => ({
+const mapStateToProps = state => ({
   loggedIn: state.login.loggedIn,
-  token: state.login.token,
   error: state.login.error,
   isLoading: state.login.isLoading
 });
 
-export default connect(mapStateToProp, mapDispatchToProp)(LoginFormContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginFormContainer);

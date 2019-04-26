@@ -26,8 +26,8 @@ function reducer(state = initialState, action) {
     case '@@login/GET_LOGIN_SUCCESS':
       return {
         ...state,
-        token: action.data.res.data.token,
-        userName: action.data.user,
+        token: action.payload.res.data.token,
+        userName: action.payload.user,
         loggedIn: true
       };
     case '@@login/GET_LOGIN_FAILURE':
